@@ -16,7 +16,7 @@ const puppeteerOptions = {
 }
 
 if (args.length === 9) {
-    args.push('--proxy-server=' + args[8])
+    puppeteerOptions.args.push('--proxy-server=' + args[8])
 }
 
 upload({
