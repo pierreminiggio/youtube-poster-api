@@ -7,4 +7,5 @@ CREATE TABLE `youtube_poster_api`.`youtube_account` (
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
+ALTER TABLE `youtube_account` ADD `google_recovery_email` VARCHAR(255) NOT NULL AFTER `google_password`;
 ```

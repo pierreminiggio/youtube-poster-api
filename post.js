@@ -2,8 +2,8 @@ import { upload } from 'youtube-videos-uploader'
 
 const args = process.argv
 
-if (args.length !== 7 && args.length !== 8) {
-    console.log('Use like this : node post.js [googleLogin] [googlePassword] [videoFileName] [title] [description] [?proxy]')
+if (args.length !== 8 && args.length !== 9) {
+    console.log('Use like this : node post.js [googleLogin] [googlePassword] [googleRecoveryEmail] [videoFileName] [title] [description] [?proxy]')
     process.exit()
 }
 
@@ -15,17 +15,18 @@ const puppeteerOptions = {
     ]
 }
 
-if (args.length === 8) {
-    args.push('--proxy-server=' + args[7])
+if (args.length === 9) {
+    args.push('--proxy-server=' + args[8])
 }
 
 upload({
     email: args[2],
-    pass: args[3]
+    pass: args[3],
+    recoveryemail: args[4]
 },[{
-    path: args[4],
-    title: args[5],
-    description: args[6],
+    path: args[5],
+    title: args[6],
+    description: args[7],
 }], puppeteerOptions).then(videoLink => {
     console.log(JSON.stringify(videoLink))
 })

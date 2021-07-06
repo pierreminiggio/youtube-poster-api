@@ -42,7 +42,8 @@ class App
                 'youtube_account'
             )->select(
                 'google_login',
-                'google_password'
+                'google_password',
+                'google_recovery_email'
             )->where('channel_id = :channel_id'),
             ['channel_id' => $youtubeChannelId]
         );
@@ -99,6 +100,7 @@ class App
         $fetchedAccount = $fetchedAccounts[0];
         $googleLogin = $fetchedAccount['google_login'];
         $googlePassword = $fetchedAccount['google_password'];
+        $googleRecoveryEmail = $fetchedAccount['google_recovery_email'];
 
         $output = trim(shell_exec(
             'node '
@@ -107,6 +109,8 @@ class App
             . escapeshellarg($googleLogin)
             . ' '
             . escapeshellarg($googlePassword)
+            . ' '
+            . escapeshellarg($googleRecoveryEmail)
             . ' '
             . escapeshellarg($videoFileName)
             . ' '
