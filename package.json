@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "dependencies": {
+    "youtube-videos-uploader": "^1.2.1"
+  }
+}
