@@ -103,7 +103,7 @@ class App
         $googleRecoveryEmail = $fetchedAccount['google_recovery_email'];
 
         $output = trim(shell_exec(
-            'node '
+            'LC_CTYPE=en_US.utf8 node '
             . $projectFolder
             . 'post.js '
             . escapeshellarg($googleLogin)
