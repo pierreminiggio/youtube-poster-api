@@ -29,4 +29,4 @@ upload({
     description: args[7],
 }], puppeteerOptions).then(videoLink => {
     console.log(JSON.stringify(videoLink))
-})
+}).catch(error => console.log(JSON.stringify(error)))
