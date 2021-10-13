@@ -142,6 +142,18 @@ class App
 
             return;
         }
+        
+        $isAssoc = function (array $arr) {
+            if (array() === $arr) return false;
+            return array_keys($arr) !== range(0, count($arr) - 1);
+        }
+        
+        if ($isAssoc($jsonOutput)) {
+            http_response_code(500);
+            echo json_encode(['error' => $output]);
+
+            return;
+        }
 
         $probablyLink = $jsonOutput[0];
         $youtubeLinkStart = 'https://youtu.be/';
