@@ -27,6 +27,12 @@ upload({
     path: args[5],
     title: args[6],
     description: args[7],
-}], puppeteerOptions).then(videoLink => {
-    console.log(JSON.stringify(videoLink))
+}], puppeteerOptions).then(videoLinks => {
+    if (videoLinks && videoLinks.length) {
+        console.log(videoLinks[0])
+    } else {
+        console.log('Error, no video')
+    }
+ 
+    process.exit();
 }).catch(error => console.log(JSON.stringify(error)))
