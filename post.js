@@ -19,15 +19,23 @@ if (args.length === 9) {
     puppeteerOptions.args.push('--proxy-server=' + args[8])
 }
 
-upload({
-    email: args[2],
-    pass: args[3],
-    recoveryemail: args[4]
-},[{
-    path: args[5],
-    title: args[6],
-    description: args[7],
-}], puppeteerOptions).then(videoLinks => {
+upload(
+    {
+        email: args[2],
+        pass: args[3],
+        recoveryemail: args[4]
+    },
+    [{
+        path: args[5],
+        title: args[6],
+        description: args[7],
+    }],
+    puppeteerOptions,
+    {
+        log: () => {},
+        userAction: console.log
+    }
+).then(videoLinks => {
     if (videoLinks && videoLinks.length) {
         console.log(JSON.stringify(videoLinks))
     } else {
