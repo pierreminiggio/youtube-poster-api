@@ -86,7 +86,7 @@ class App
 
         $videoFileName = $cacheFolder . (new DateTime())->getTimestamp() . '.mp4';
 
-        set_time_limit(0);
+        set_time_limit(720);
 
         $fp = fopen($videoFileName, 'w+');
         $ch = curl_init($videoUrl);
