@@ -10,8 +10,10 @@ require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . 
 $configProvider = new ConfigProvider(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
 $config = $configProvider->get();
 $dbConfig = $config['db'];
+$featureAvailable = $config['working'] ?? false;
 
 $app = new App(
+    $featureAvailable,
     new DatabaseFetcher(new DatabaseConnection(
         $dbConfig['host'],
         $dbConfig['database'],
