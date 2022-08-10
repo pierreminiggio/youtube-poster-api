@@ -9,6 +9,7 @@ class App
 {
 
     public function __construct(
+        private bool $featureAvailable,
         private DatabaseFetcher $fetcher,
         private string $token,
         private ?string $proxy
@@ -22,6 +23,12 @@ class App
         ?string $authHeader
     ): void
     {
+        if (! $this->featureAvailable) {
+            http_response_code(503);
+
+            return;
+        }
+        
         if ($path === '/') {
             http_response_code(404);
 
