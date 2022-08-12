@@ -5,9 +5,11 @@ use PierreMiniggio\ConfigProvider\ConfigProvider;
 use PierreMiniggio\DatabaseConnection\DatabaseConnection;
 use PierreMiniggio\DatabaseFetcher\DatabaseFetcher;
 
-require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+$projectDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
 
-$configProvider = new ConfigProvider(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
+require $projectDirectory . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+
+$configProvider = new ConfigProvider($projectDirectory);
 $config = $configProvider->get();
 $dbConfig = $config['db'];
 $featureAvailable = $config['working'] ?? false;
