@@ -19,6 +19,8 @@ if (args.length === 9) {
     puppeteerOptions.args.push('--proxy-server=' + args[8])
 }
 
+let logTrace = '';
+
 upload(
     {
         email: args[2],
@@ -28,19 +30,22 @@ upload(
     [{
         path: args[5],
         title: args[6],
-        description: args[7],
+        description: args[7]
     }],
     puppeteerOptions,
     {
-        log: () => {},
-        userAction: console.log
+        log: toLog => logTrace += `\r\n Log: ${toLog}`,
+        userAction: userAction => userAction += `\r\n Log: ${userAction}`
     }
 ).then(videoLinks => {
     if (videoLinks && videoLinks.length) {
         console.log(JSON.stringify(videoLinks))
     } else {
-        console.log('Error, no video')
+        console.log('Error, no video ' + logTrace)
     }
- 
+
     process.exit();
-}).catch(error => console.log(JSON.stringify(error)))
+}).catch(error => {
+    console.log(JSON.stringify({error, logTrace}))
+    process.exit();
+})

@@ -145,7 +145,7 @@ class App
 
         if (empty($jsonOutput)) {
             http_response_code(500);
-            echo json_encode(['error' => 'Empty JSON output']);
+            echo json_encode(['error' => 'Empty JSON output ' . $output]);
 
             return;
         }
