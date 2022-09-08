@@ -28,7 +28,7 @@ class App
 
             return;
         }
-        
+
         if ($path === '/') {
             http_response_code(404);
 
@@ -41,7 +41,7 @@ class App
             return;
         }
 
-        
+
         $youtubeChannelId = substr($path, 1);
 
         $fetchedAccounts = $this->fetcher->query(
@@ -104,6 +104,13 @@ class App
         curl_close($ch);
         fclose($fp);
 
+        if (! file_exists($videlFileName)) {
+             http_response_code(500);
+             echo json_encode(['error' => 'Downloaded video file failed']);
+
+             return;
+        }
+
         $fetchedAccount = $fetchedAccounts[0];
         $googleLogin = $fetchedAccount['google_login'];
         $googlePassword = $fetchedAccount['google_password'];
@@ -149,13 +156,13 @@ class App
 
             return;
         }
-        
+
         $isAssoc = function (array $arr) {
             if (array() === $arr) return false;
-            
+
             return array_keys($arr) !== range(0, count($arr) - 1);
         };
-        
+
         if ($isAssoc($jsonOutput)) {
             http_response_code(500);
             echo json_encode(['error' => $output]);
