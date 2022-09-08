@@ -105,10 +105,18 @@ class App
         fclose($fp);
 
         if (! file_exists($videoFileName)) {
-             http_response_code(500);
-             echo json_encode(['error' => 'Downloading video file failed']);
+            http_response_code(500);
+            echo json_encode(['error' => 'Downloading video file failed']);
 
-             return;
+            return;
+        }
+
+        if (! chmod($videofileName, 0777)) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Changing video file permissions failed']);
+
+            return;
+
         }
 
         $fetchedAccount = $fetchedAccounts[0];
