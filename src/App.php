@@ -93,8 +93,6 @@ class App
 
         $videoFileName = $cacheFolder . (new DateTime())->getTimestamp() . '.mp4';
 
-        $videoFileName = realpath($videoFileName)
-
         set_time_limit(720);
 
         $fp = fopen($videoFileName, 'w+');
