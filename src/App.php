@@ -111,7 +111,7 @@ class App
             return;
         }
 
-        if (! chmod($videofileName, 0777)) {
+        if (! chmod($videoFileName, 0777)) {
             http_response_code(500);
             echo json_encode(['error' => 'Changing video file permissions failed']);
 
