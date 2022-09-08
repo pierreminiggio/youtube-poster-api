@@ -104,7 +104,7 @@ class App
         curl_close($ch);
         fclose($fp);
 
-        if (! file_exists($videlFileName)) {
+        if (! file_exists($videoFileName)) {
              http_response_code(500);
              echo json_encode(['error' => 'Downloaded video file failed']);
 
