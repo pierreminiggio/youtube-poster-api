@@ -19,7 +19,7 @@ if (args.length === 9) {
     puppeteerOptions.args.push('--proxy-server=' + args[8])
 }
 
-let logTrace = '';
+let logTrace = JSON.stringify(args);
 
 upload(
     {
