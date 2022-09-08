@@ -46,6 +46,6 @@ upload(
 
     process.exit();
 }).catch(error => {
-    console.log(JSON.stringify({error, logTrace}))
+    console.log(JSON.stringify({error: `${error.message} ${error.stack}`, logTrace}))
     process.exit();
 })
