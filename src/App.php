@@ -93,6 +93,8 @@ class App
 
         $videoFileName = $cacheFolder . (new DateTime())->getTimestamp() . '.mp4';
 
+        $videoFileName = realpath($videoFileName)
+
         set_time_limit(720);
 
         $fp = fopen($videoFileName, 'w+');
@@ -111,12 +113,21 @@ class App
             return;
         }
 
+        $videoFileName = realpath($videoFileName);
+
+        if (! $videoFileName) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Real path determination failed']);
+
+            return;
+        }
+
+
         if (! chmod($videoFileName, 0777)) {
             http_response_code(500);
             echo json_encode(['error' => 'Changing video file permissions failed']);
 
             return;
-
         }
 
         $fetchedAccount = $fetchedAccounts[0];
